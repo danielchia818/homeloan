@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- saved from url=(0070)file:///C:/Users/USER/Downloads/loan_amortization_print_report_v2.html -->
+<!-- saved from url=(0062)file:///C:/Users/USER/Downloads/gemini-code-1792812975071.html -->
 <html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
@@ -107,7 +107,6 @@
             .layout { grid-template-columns: 360px 1fr; padding: 0 16px; margin: 20px auto; gap: 20px; }
         }
 
-        /* 資訊提示條 Info Tips */
         .ios-tip-banner {
             background: #eff6ff;
             border: 1.5px solid #93c5fd;
@@ -165,7 +164,7 @@
         }
         input:focus { outline: none; border-color: var(--blue); background: #fff; box-shadow: 0 0 0 3px rgba(37,99,235,0.15); }
 
-        /* 事件清單 Dynamic Lists */
+        /* 動態清單 */
         .event-list { margin-top: 10px; max-height: 160px; overflow-y: auto; }
         .event-item {
             display: flex;
@@ -192,7 +191,7 @@
         }
         .btn-del:active { background: #ef4444; color: #fff; }
 
-        /* ==================== 強化對比度：近期排程預報橫幅與卡片 ==================== */
+        /* 即時排程橫幅與卡片 (高對比深色文字) */
         .current-month-banner {
             background: #ffffff;
             border: 2px solid #2563eb;
@@ -220,9 +219,7 @@
             align-items: center; 
             gap: 6px; 
         }
-        .banner-title strong {
-            color: #1d4ed8;
-        }
+        .banner-title strong { color: #1d4ed8; }
         .banner-cur-badge { 
             font-size: 13px; 
             background: #eff6ff; 
@@ -462,26 +459,29 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        /* ==================== 專業 CSS @media print 嚴格規範 ==================== */
+        /* =========================================================================
+           專業 CSS @media print 嚴格規範 (iPhone Safari + 電腦版 100% 完美鎖定第 1 頁)
+           ========================================================================= */
         @media print {
             @page {
                 size: A4 portrait;
-                margin: 7mm 9mm 9mm 9mm;
+                margin: 6mm 8mm 6mm 8mm; /* 稍微精簡邊界，確保 iOS 列印視窗具備足夠垂直排版空間 */
             }
             *, *:before, *:after {
                 box-sizing: border-box !important;
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;
             }
-            body { 
-                background: #ffffff !important; 
-                padding: 0 !important; 
+            html, body {
+                width: 100% !important;
+                height: 100% !important;
+                background: #ffffff !important;
+                padding: 0 !important;
                 margin: 0 !important;
-                color: #000000 !important; 
-                font-size: 8.5pt !important;
-                line-height: 1.35 !important;
+                color: #000000 !important;
             }
 
+            /* 隱藏網頁端介面元件 */
             .navbar, aside, .btn, .ios-tip-banner, #loadingOverlay, .badge {
                 display: none !important;
             }
@@ -496,135 +496,139 @@
                 padding: 0 !important;
             }
 
+            /* ==================== 第一頁容器：絕對鎖定單頁高度，不得超出 ==================== */
             .print-page-1 {
+                page-break-before: auto !important;
                 page-break-after: always !important;
                 break-after: page !important;
-                min-height: 265mm !important;
-                max-height: 279mm !important;
+                height: 283mm !important;
+                max-height: 283mm !important;
                 overflow: hidden !important;
                 display: flex !important;
                 flex-direction: column !important;
-                justify-content: flex-start !important;
+                justify-content: space-between !important;
                 position: relative !important;
                 box-sizing: border-box !important;
+                padding-bottom: 2mm !important;
             }
 
-            .print-page-2 {
-                page-break-before: always !important;
-                break-before: page !important;
-                display: block !important;
-                width: 100% !important;
-            }
-
+            /* 表頭 */
             .print-report-header {
                 display: block !important;
-                margin-bottom: 5px !important;
+                margin-bottom: 3px !important;
                 border-bottom: 2px solid #0f172a !important;
-                padding-bottom: 3px !important;
+                padding-bottom: 2px !important;
             }
             .print-report-header h1 {
-                font-size: 14pt !important;
+                font-size: 13.5pt !important;
                 color: #0f172a !important;
                 margin-bottom: 1px !important;
                 font-weight: 800 !important;
+                line-height: 1.2 !important;
             }
             .print-report-header p {
-                font-size: 7.8pt !important;
+                font-size: 7.2pt !important;
                 color: #1e293b !important;
-                margin: 1px 0 !important;
+                margin: 0.5px 0 !important;
                 font-weight: 600 !important;
+                line-height: 1.3 !important;
             }
 
-            /* 即時進度卡片列印樣式 (高對比黑灰深藍) */
+            /* 即時進度卡片 */
             .print-banner {
                 background: #f8fafc !important;
                 border: 1.5px solid #2563eb !important;
-                border-radius: 6px !important;
-                padding: 5px 8px !important;
-                margin-bottom: 5px !important;
+                border-radius: 5px !important;
+                padding: 4px 6px !important;
+                margin-bottom: 3px !important;
                 break-inside: avoid !important;
-                page-break-inside: avoid !important;
             }
             .print-banner-title {
-                font-size: 8.5pt !important;
+                font-size: 8pt !important;
                 color: #0f172a !important;
                 font-weight: 800 !important;
-                margin-bottom: 3px !important;
+                margin-bottom: 2px !important;
                 border-bottom: 1px solid #cbd5e1 !important;
-                padding-bottom: 2px !important;
+                padding-bottom: 1px !important;
             }
             .print-upcoming-grid {
                 display: grid !important;
-                grid-template-columns: repeat(3, 1fr) !important;
-                gap: 5px !important;
+                grid-template-columns: repeat(4, 1fr) !important; /* 4 欄並排，垂直高度大幅節約 */
+                gap: 4px !important;
             }
             .print-upcoming-card {
                 background: #ffffff !important;
                 border: 1px solid #94a3b8 !important;
-                padding: 4px 6px !important;
+                padding: 3px 5px !important;
                 border-radius: 4px !important;
-                font-size: 7.5pt !important;
+                font-size: 6.8pt !important;
                 color: #0f172a !important;
             }
             .print-upcoming-card .u-tag {
-                font-size: 7.5pt !important;
+                font-size: 6.8pt !important;
                 font-weight: 800 !important;
                 color: #0f172a !important;
                 margin-bottom: 1px !important;
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
             }
             .print-upcoming-card .u-pmt {
-                font-size: 9.5pt !important;
+                font-size: 8.8pt !important;
                 font-weight: 900 !important;
                 color: #1e40af !important;
+                line-height: 1.15 !important;
             }
             .print-upcoming-card .u-sub {
-                font-size: 7pt !important;
+                font-size: 6.5pt !important;
                 color: #334155 !important;
                 font-weight: 600 !important;
+                line-height: 1.2 !important;
             }
             .print-upcoming-card .u-bal {
-                font-size: 7pt !important;
+                font-size: 6.5pt !important;
                 color: #047857 !important;
                 font-weight: 700 !important;
+                border-top: 0.5px dashed #cbd5e1 !important;
+                margin-top: 1px !important;
+                padding-top: 1px !important;
             }
 
-            /* KPI 網格 */
+            /* KPI 網格 (3 欄 x 2 列) */
             .print-kpi-grid {
                 display: grid !important;
                 grid-template-columns: repeat(3, 1fr) !important;
-                gap: 4px !important;
-                margin-bottom: 5px !important;
+                gap: 3px !important;
+                margin-bottom: 3px !important;
                 break-inside: avoid !important;
-                page-break-inside: avoid !important;
             }
             .print-kpi-item {
                 background: #f8fafc !important;
                 border: 1px solid #cbd5e1 !important;
                 border-radius: 4px !important;
-                padding: 3.5px 6px !important;
+                padding: 3px 5px !important;
             }
-            .print-kpi-lbl { font-size: 7.2pt !important; color: #475569 !important; font-weight: 700 !important; }
-            .print-kpi-val { font-size: 9.5pt !important; font-weight: 900 !important; color: #0f172a !important; }
-            .print-kpi-sub { font-size: 7.2pt !important; color: #334155 !important; }
+            .print-kpi-lbl { font-size: 6.8pt !important; color: #475569 !important; font-weight: 700 !important; line-height: 1.1 !important; }
+            .print-kpi-val { font-size: 9pt !important; font-weight: 900 !important; color: #0f172a !important; line-height: 1.2 !important; }
+            .print-kpi-sub { font-size: 6.5pt !important; color: #334155 !important; line-height: 1.1 !important; }
 
-            /* 圖表區域 (高解析度圖片) */
+            /* 雙圖表區 (精準限制高度為 140px，防止推擠超出頁面) */
             .print-charts-row {
                 display: grid !important;
                 grid-template-columns: 1fr 1.6fr !important;
-                gap: 6px !important;
-                margin-bottom: 5px !important;
+                gap: 5px !important;
+                margin-bottom: 3px !important;
                 break-inside: avoid !important;
-                page-break-inside: avoid !important;
             }
             .print-chart-box {
                 border: 1px solid #cbd5e1 !important;
-                border-radius: 5px !important;
-                padding: 4px 6px !important;
+                border-radius: 4px !important;
+                padding: 3px 5px !important;
                 background: #ffffff !important;
                 text-align: center !important;
             }
             .print-chart-box h4 {
-                font-size: 7.8pt !important;
+                font-size: 7.4pt !important;
                 margin-bottom: 2px !important;
                 text-align: left !important;
                 color: #0f172a !important;
@@ -632,7 +636,8 @@
             }
             .print-chart-box img {
                 max-width: 100% !important;
-                height: auto !important;
+                height: 135px !important; /* 鎖定圖表列印渲染高度 */
+                object-fit: contain !important;
                 display: block !important;
                 margin: 0 auto !important;
             }
@@ -641,46 +646,51 @@
             .print-event-box {
                 border: 1px solid #cbd5e1 !important;
                 background: #f8fafc !important;
-                border-radius: 5px !important;
-                padding: 4px 7px !important;
-                margin-bottom: 5px !important;
+                border-radius: 4px !important;
+                padding: 3px 6px !important;
+                margin-bottom: 3px !important;
                 break-inside: avoid !important;
-                page-break-inside: avoid !important;
             }
-            .print-event-box h4 { font-size: 7.8pt !important; margin-bottom: 2px !important; color: #0f172a !important; font-weight: 800 !important; }
-            .print-event-cols { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 5px !important; }
-            .print-event-col { background: #fff !important; border: 1px solid #e2e8f0 !important; border-radius: 4px !important; padding: 3px 5px !important; font-size: 7.2pt !important; }
-            .print-event-col ul { padding-left: 14px !important; margin: 0 !important; color: #0f172a !important; font-weight: 600 !important; }
+            .print-event-box h4 { font-size: 7.4pt !important; margin-bottom: 2px !important; color: #0f172a !important; font-weight: 800 !important; }
+            .print-event-cols { display: grid !important; grid-template-columns: 1fr 1fr !important; gap: 4px !important; }
+            .print-event-col { background: #fff !important; border: 1px solid #e2e8f0 !important; border-radius: 3px !important; padding: 2px 4px !important; font-size: 6.8pt !important; }
+            .print-event-col ul { padding-left: 12px !important; margin: 0 !important; color: #0f172a !important; font-weight: 600 !important; }
 
             /* AI 策略建議 */
             .print-advice-box {
                 border: 1px solid #166534 !important;
                 background: #f0fdf4 !important;
                 color: #14532d !important;
-                padding: 4px 7px !important;
-                border-radius: 5px !important;
-                font-size: 7.2pt !important;
-                line-height: 1.35 !important;
+                padding: 3px 6px !important;
+                border-radius: 4px !important;
+                font-size: 6.8pt !important;
+                line-height: 1.3 !important;
                 break-inside: avoid !important;
-                page-break-inside: avoid !important;
+                margin-bottom: 2px !important;
             }
-            .print-advice-box h4 { font-size: 7.8pt !important; margin-bottom: 2px !important; color: #14532d !important; font-weight: 800 !important; }
+            .print-advice-box h4 { font-size: 7.4pt !important; margin-bottom: 1px !important; color: #14532d !important; font-weight: 800 !important; }
 
-            /* 第一頁底部頁碼 */
+            /* 第一頁底部頁碼指示器 (相對於容器底部鎖定) */
             .print-p1-footer {
-                position: absolute !important;
-                bottom: 0 !important;
-                left: 0 !important;
-                width: 100% !important;
                 text-align: center !important;
-                font-size: 7.2pt !important;
+                font-size: 6.8pt !important;
                 color: #475569 !important;
                 border-top: 1px solid #e2e8f0 !important;
                 padding-top: 2px !important;
                 font-weight: 600 !important;
+                margin-top: 1px !important;
+                width: 100% !important;
             }
 
-            /* 第二頁本利攤還明細表 */
+            /* ==================== 第二頁起：完整貸款本利攤還明細表 ==================== */
+            .print-page-2 {
+                page-break-before: always !important;
+                break-before: page !important;
+                display: block !important;
+                width: 100% !important;
+                padding-top: 2mm !important;
+            }
+
             .print-table-section {
                 width: 100% !important;
             }
@@ -689,7 +699,7 @@
                 font-weight: 800 !important;
                 border-bottom: 2px solid #0f172a !important;
                 padding-bottom: 3px !important;
-                margin-bottom: 5px !important;
+                margin-bottom: 4px !important;
                 display: flex !important;
                 justify-content: space-between !important;
             }
@@ -743,7 +753,7 @@
     <!-- 導覽列 Navbar -->
     <header class="navbar">
         <div class="nav-container">
-            <div class="nav-title">🏠 房貸與本利攤還試算系統 <span style="font-size:12px;font-weight:400;opacity:0.85;">(高階跨平台報表版)</span></div>
+            <div class="nav-title">🏠 房貸與本利攤還試算系統 <span style="font-size:12px;font-weight:400;opacity:0.85;">(A4精準分頁版)</span></div>
             <div class="nav-actions">
                 <label class="btn btn-dark" style="margin:0;cursor:pointer;" title="匯入已儲存的試算專案檔">
                     📂 匯入專案
@@ -760,7 +770,7 @@
         <!-- 側邊控制面板 -->
         <aside>
             <div class="ios-tip-banner">
-                <span>💡 <strong>iPhone 列印提示：</strong>彈出列印預覽頁時，於畫面縮圖用「雙指往外滑動放大」，即可直接儲存為標準 PDF 檔或透過 LINE/AirDrop 分享。</span>
+                <span>💡 <strong>iPhone 列印提示：</strong>彈出列印預覽頁時，於畫面縮圖用「雙指往外滑動放大」，即可直接儲存為標準 PDF 檔或透過 LINE/AirDrop 分享。首頁已嚴格鎖定於第一頁不超頁。</span>
             </div>
 
             <!-- 基本參數卡片 -->
@@ -844,10 +854,10 @@
 
         <!-- 主試算報表區 -->
         <main>
-            <!-- ==================== 高對比度、字體清晰之即時進度橫幅 ==================== -->
+            <!-- 即時進度橫幅 -->
             <div class="current-month-banner" id="currentMonthBanner">
                 <div class="banner-top">
-                    <div class="banner-title" id="currentBannerText">📍 <strong>目前試算期：第 34 期</strong> ｜ 還款日：<strong style="color:#0f172a;">2026-10-15</strong> (今日基準：2026-10-24) ｜ 剩餘本金：<strong>89.20 萬元</strong></div>
+                    <div class="banner-title" id="currentBannerText">📍 <strong>目前試算期：第 34 期</strong> ｜ 還款日：<strong style="color:#0f172a;">2026-10-15</strong> ｜ 剩餘本金：<strong>89.20 萬元</strong></div>
                     <div class="banner-cur-badge" id="currentBannerPmt">當期月付：NT$ 5,546</div>
                 </div>
                 <div class="upcoming-header-title">
@@ -857,17 +867,17 @@
                             <div class="upcoming-card is-active-card">
                                 <div class="u-tag">
                                     <span class="badge-num">第 34 期</span>
-                                    <span>📌 當期繳款排程 ｜ 2026-10-15</span>
+                                    <span>📌 當期繳款 ｜ 2026-10-15</span>
                                 </div>
                                 <div class="u-pmt">NT$ 5,546</div>
                                 <div class="u-sub">
-                                    本金: <span class="u-val">NT$ 3,308</span> ｜ 利息: <span class="u-val" style="color:#b45309;">NT$ 2,238</span>
+                                    本: <span class="u-val">3,308</span> ｜ 息: <span class="u-val" style="color:#b45309;">2,238</span>
                                 </div>
                                 <div class="u-sub">
-                                    計算利率: <span class="u-val">3.0000%</span>
+                                    利率: <span class="u-val">3.0000%</span>
                                 </div>
                                 <div class="u-bal">
-                                    期末餘額: <strong>89.20 萬元</strong>
+                                    餘額: <strong>89.20 萬</strong>
                                 </div>
                                 
                             </div>
@@ -875,17 +885,17 @@
                             <div class="upcoming-card">
                                 <div class="u-tag">
                                     <span class="badge-num">第 35 期</span>
-                                    <span>🗓️ 未來第 +1 個月 ｜ 2026-11-15</span>
+                                    <span>🗓️ 未來+1月 ｜ 2026-11-15</span>
                                 </div>
                                 <div class="u-pmt">NT$ 5,546</div>
                                 <div class="u-sub">
-                                    本金: <span class="u-val">NT$ 3,316</span> ｜ 利息: <span class="u-val" style="color:#b45309;">NT$ 2,230</span>
+                                    本: <span class="u-val">3,316</span> ｜ 息: <span class="u-val" style="color:#b45309;">2,230</span>
                                 </div>
                                 <div class="u-sub">
-                                    計算利率: <span class="u-val">3.0000%</span>
+                                    利率: <span class="u-val">3.0000%</span>
                                 </div>
                                 <div class="u-bal">
-                                    期末餘額: <strong>88.87 萬元</strong>
+                                    餘額: <strong>88.87 萬</strong>
                                 </div>
                                 
                             </div>
@@ -893,17 +903,17 @@
                             <div class="upcoming-card">
                                 <div class="u-tag">
                                     <span class="badge-num">第 36 期</span>
-                                    <span>🗓️ 未來第 +2 個月 ｜ 2026-12-15</span>
+                                    <span>🗓️ 未來+2月 ｜ 2026-12-15</span>
                                 </div>
                                 <div class="u-pmt">NT$ 5,546</div>
                                 <div class="u-sub">
-                                    本金: <span class="u-val">NT$ 3,324</span> ｜ 利息: <span class="u-val" style="color:#b45309;">NT$ 2,222</span>
+                                    本: <span class="u-val">3,324</span> ｜ 息: <span class="u-val" style="color:#b45309;">2,222</span>
                                 </div>
                                 <div class="u-sub">
-                                    計算利率: <span class="u-val">3.0000%</span>
+                                    利率: <span class="u-val">3.0000%</span>
                                 </div>
                                 <div class="u-bal">
-                                    期末餘額: <strong>88.54 萬元</strong>
+                                    餘額: <strong>88.54 萬</strong>
                                 </div>
                                 
                             </div>
@@ -911,17 +921,17 @@
                             <div class="upcoming-card">
                                 <div class="u-tag">
                                     <span class="badge-num">第 37 期</span>
-                                    <span>🗓️ 未來第 +3 個月 ｜ 2027-01-15</span>
+                                    <span>🗓️ 未來+3月 ｜ 2027-01-15</span>
                                 </div>
                                 <div class="u-pmt">NT$ 5,546</div>
                                 <div class="u-sub">
-                                    本金: <span class="u-val">NT$ 3,332</span> ｜ 利息: <span class="u-val" style="color:#b45309;">NT$ 2,214</span>
+                                    本: <span class="u-val">3,332</span> ｜ 息: <span class="u-val" style="color:#b45309;">2,214</span>
                                 </div>
                                 <div class="u-sub">
-                                    計算利率: <span class="u-val">3.0000%</span>
+                                    利率: <span class="u-val">3.0000%</span>
                                 </div>
                                 <div class="u-bal">
-                                    期末餘額: <strong>88.21 萬元</strong>
+                                    餘額: <strong>88.21 萬</strong>
                                 </div>
                                 
                             </div>
@@ -1003,9 +1013,9 @@
             <div class="ai-box" id="aiAdviceBox">
                 <h4>🤖 財務專家還本建議與策略評估</h4>
                 <div id="aiAdviceContent">
-                1. <strong>黃金還款衝刺期（前 72 期內，約前 6.0 年）：</strong> 本息攤還初期利息占比最重，在此階段增加單筆提早償還本金，複利省息效能最高。<br>
-                2. <strong>提前還本效益試算：</strong> 若於<strong>第 12 期（第 1 年末）</strong>提前償還 <strong>5 萬元</strong> 本金，預計累計可節省約 <strong>NT$ 16,530 元</strong> 利息支出，並縮短約 <strong>9 個月</strong> 總貸款年限。<br>
-                3. <strong>資金機會成本評估：</strong> 當前基準利率為 3.0000%。若手邊具備穩定年化報酬率大於 <strong>4.2000%</strong> 之資產配置管道，亦可保留足夠緊急週轉金，維持充裕現金流。
+                1. <strong>黃金還款期（前 72 期，約前 6.0 年）：</strong> 本息攤還初期利息占比最重，在此階段提早償還本金，複利省息效能最高。<br>
+                2. <strong>提前還本效益：</strong> 若於<strong>第 12 期</strong>提前償還 <strong>5 萬元</strong> 本金，預計累計可省下約 <strong>NT$ 16,530 元</strong> 利息，並縮短約 <strong>9 個月</strong> 期數。<br>
+                3. <strong>資金機會成本：</strong> 基準利率為 3.0000%。若手邊具備報酬率大於 <strong>4.2000%</strong> 之穩健配置管道，亦可保留充足週轉金。
             </div>
             </div>
 
@@ -3196,7 +3206,7 @@
         </main>
     </div>
 
-    <!-- ==================== 動態專屬列印 DOM 容器 (Print View DOM) ==================== -->
+    <!-- 動態專屬列印 DOM 容器 -->
     <div id="printViewContainer"></div>
 
     <!-- 轉出中 Loading 遮罩 -->
@@ -3206,16 +3216,14 @@
     </div>
 
     <script>
-        // 全域計算狀態
         const state = {
             rates: {},    // { "YYYY-MM-DD": rateNumber }
             prepays: {}   // { "YYYY-MM-DD": amountWan }
         };
         let scheduleData = [];
         let summaryData = {};
-        let currentPeriodIndex = -1; // 當前所在之期數索引
+        let currentPeriodIndex = -1;
 
-        // 數字與格式化輔助函式
         function fmt(n, d = 0) { 
             return Number(n || 0).toLocaleString('zh-TW', { minimumFractionDigits: d, maximumFractionDigits: d }); 
         }
@@ -3223,14 +3231,12 @@
             return Number(r || 0).toFixed(4); 
         }
 
-        // 本息平均攤還法計算月付額
         function pmtForm(r, n, pv) {
             if (n <= 0 || pv <= 0) return 0;
             if (r <= 0) return pv / n;
             return pv * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
         }
 
-        // 精準年月加減處理
         function addMonthsExact(startDateStr, mOffset) {
             const [y, m, d] = startDateStr.split('-').map(Number);
             const targetM = m - 1 + mOffset;
@@ -3241,7 +3247,6 @@
             return `${targetY}-${String(finalM + 1).padStart(2, '0')}-${String(finalD).padStart(2, '0')}`;
         }
 
-        // 初始化預設還款與異動日
         const initStart = document.getElementById('startDate').value || '2024-01-15';
         document.getElementById('hkDate').value = addMonthsExact(initStart, 12);
         document.getElementById('ppDate').value = addMonthsExact(initStart, 24);
@@ -3309,15 +3314,12 @@
             const shortenPeriods = Math.max(1, Math.round((samplePrepay / amtWan) * totalM * 0.75));
 
             advBox.innerHTML = `
-                1. <strong>黃金還款衝刺期（前 ${goldenPeriod} 期內，約前 ${(goldenPeriod/12).toFixed(1)} 年）：</strong> 本息攤還初期利息占比最重，在此階段增加單筆提早償還本金，複利省息效能最高。<br>
-                2. <strong>提前還本效益試算：</strong> 若於<strong>第 12 期（第 1 年末）</strong>提前償還 <strong>${samplePrepay} 萬元</strong> 本金，預計累計可節省約 <strong>NT$ ${fmt(saveEst)} 元</strong> 利息支出，並縮短約 <strong>${shortenPeriods} 個月</strong> 總貸款年限。<br>
-                3. <strong>資金機會成本評估：</strong> 當前基準利率為 ${fmtRate(baseRate * 100)}%。若手邊具備穩定年化報酬率大於 <strong>${fmtRate(baseRate * 100 + 1.2)}%</strong> 之資產配置管道，亦可保留足夠緊急週轉金，維持充裕現金流。
+                1. <strong>黃金還款期（前 ${goldenPeriod} 期，約前 ${(goldenPeriod/12).toFixed(1)} 年）：</strong> 本息攤還初期利息占比最重，在此階段提早償還本金，複利省息效能最高。<br>
+                2. <strong>提前還本效益：</strong> 若於<strong>第 12 期</strong>提前償還 <strong>${samplePrepay} 萬元</strong> 本金，預計累計可省下約 <strong>NT$ ${fmt(saveEst)} 元</strong> 利息，並縮短約 <strong>${shortenPeriods} 個月</strong> 期數。<br>
+                3. <strong>資金機會成本：</strong> 基準利率為 ${fmtRate(baseRate * 100)}%。若手邊具備報酬率大於 <strong>${fmtRate(baseRate * 100 + 1.2)}%</strong> 之穩健配置管道，亦可保留充足週轉金。
             `;
         }
 
-        // =========================================================================
-        // 更新即時排程橫幅與未來 3 個月繳款明細 (全面採用高對比度深色字體與卡片設計)
-        // =========================================================================
         function updateCurrentProgressBanner() {
             const now = new Date();
             const todayStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
@@ -3343,19 +3345,18 @@
 
             if (curIndex !== -1 && curIndex < scheduleData.length) {
                 const curPeriod = scheduleData[curIndex];
-                bText.innerHTML = `📍 <strong>目前試算期：第 ${curPeriod.period} 期</strong> ｜ 還款日：<strong style="color:#0f172a;">${curPeriod.date}</strong> (今日基準：${todayStr}) ｜ 剩餘本金：<strong>${fmt(curPeriod.balWan, 2)} 萬元</strong>`;
+                bText.innerHTML = `📍 <strong>目前試算期：第 ${curPeriod.period} 期</strong> ｜ 還款日：<strong style="color:#0f172a;">${curPeriod.date}</strong> ｜ 剩餘本金：<strong>${fmt(curPeriod.balWan, 2)} 萬元</strong>`;
                 bPmt.innerHTML = `當期月付：NT$ ${fmt(curPeriod.pmt)}`;
 
                 let cardsHtml = '';
-                // 依序產出：當期 (0) 以及 未來 3 個月 (+1, +2, +3) 繳款卡片
                 for (let offset = 0; offset <= 3; offset++) {
                     const idx = curIndex + offset;
                     const isCurrent = (offset === 0);
-                    const tagTitle = isCurrent ? '📌 當期繳款排程' : `🗓️ 未來第 +${offset} 個月`;
+                    const tagTitle = isCurrent ? '📌 當期繳款' : `🗓️ 未來+${offset}月`;
 
                     if (idx < scheduleData.length) {
                         const r = scheduleData[idx];
-                        const prepayNotice = r.prepayWan > 0 ? `<div class="u-prepay">★ 提前還本 ${r.prepayWan} 萬</div>` : '';
+                        const prepayNotice = r.prepayWan > 0 ? `<div class="u-prepay">★ 多還 ${r.prepayWan} 萬</div>` : '';
                         const activeClass = isCurrent ? 'upcoming-card is-active-card' : 'upcoming-card';
 
                         cardsHtml += `
@@ -3366,13 +3367,13 @@
                                 </div>
                                 <div class="u-pmt">NT$ ${fmt(r.pmt)}</div>
                                 <div class="u-sub">
-                                    本金: <span class="u-val">NT$ ${fmt(r.prin)}</span> ｜ 利息: <span class="u-val" style="color:#b45309;">NT$ ${fmt(r.int)}</span>
+                                    本: <span class="u-val">${fmt(r.prin)}</span> ｜ 息: <span class="u-val" style="color:#b45309;">${fmt(r.int)}</span>
                                 </div>
                                 <div class="u-sub">
-                                    計算利率: <span class="u-val">${fmtRate(r.rate)}%</span>
+                                    利率: <span class="u-val">${fmtRate(r.rate)}%</span>
                                 </div>
                                 <div class="u-bal">
-                                    期末餘額: <strong>${fmt(r.balWan, 2)} 萬元</strong>
+                                    餘額: <strong>${fmt(r.balWan, 2)} 萬</strong>
                                 </div>
                                 ${prepayNotice}
                             </div>
@@ -3382,7 +3383,7 @@
                             <div class="upcoming-card">
                                 <div class="u-tag"><span class="badge-num">-</span><span>${tagTitle}</span></div>
                                 <div class="u-pmt" style="color:#64748b;">NT$ 0</div>
-                                <div class="u-sub">本期貸款已清償完畢</div>
+                                <div class="u-sub">貸款已清償完畢</div>
                             </div>
                         `;
                     }
@@ -3392,14 +3393,13 @@
                 bText.textContent = `今日為 ${todayStr}，本專案已無後續待繳期數或已全數結清！`;
                 bPmt.textContent = `當期月付：NT$ 0`;
                 cardsContainer.innerHTML = `
-                    <div class="upcoming-card" style="grid-column:1/-1;text-align:center;padding:16px;">
+                    <div class="upcoming-card" style="grid-column:1/-1;text-align:center;padding:14px;">
                         <div class="u-pmt" style="color:#059669;">🎉 所有貸款本息已全數償還結清，無待繳款項</div>
                     </div>
                 `;
             }
         }
 
-        // 核心試算演算法
         function calculate() {
             const name = document.getElementById('loanName').value.trim() || '鈔好貸青年專案';
             const amtWan = parseFloat(document.getElementById('amountWan').value) || 0;
@@ -3538,22 +3538,16 @@
             return ctx;
         }
 
-        // =========================================================================
-        // 強化圖表繪製：
-        // 1. 各期攤還走勢圖加入「X軸年份標記」與「當前進度標記線/標註點」
-        // 2. 徹底解決字體過淺問題，顏色深沉且對比鮮明
-        // =========================================================================
         function drawCharts() {
             if (!scheduleData.length) return;
             
-            // 1. 繪製本息比重圓形圖
+            // 1. 繪製本息比重圓餅圖
             const pCtx = setupHiDPI(document.getElementById('pieChart'), 340, 220);
             const prin = summaryData.amtWan;
             const intVal = summaryData.totInt / 10000;
             const tot = prin + intVal;
             const pAng = tot > 0 ? (prin / tot) * Math.PI * 2 : 0;
             
-            // 圓環外徑與內徑
             pCtx.beginPath(); 
             pCtx.moveTo(110, 110); 
             pCtx.arc(110, 110, 72, -Math.PI / 2, -Math.PI / 2 + pAng); 
@@ -3579,7 +3573,6 @@
             pCtx.font = 'bold 13px sans-serif'; 
             pCtx.fillText(`${fmt(tot, 1)}萬`, 110, 122);
             
-            // 圖例標註 (高對比深色文字)
             pCtx.textAlign = 'left'; 
             pCtx.fillStyle = '#2563eb'; 
             pCtx.fillRect(205, 75, 12, 12);
@@ -3606,7 +3599,6 @@
             const padL = 55, padR = 20, padT = 30, padB = 30;
             const pW = 560 - padL - padR, pH = 220 - padT - padB;
             
-            // Y軸水平網格與刻度 (使用高對比深灰 #334155)
             tCtx.textAlign = 'right'; 
             tCtx.font = 'bold 9.5px sans-serif';
             for (let i = 0; i <= 4; i++) {
@@ -3621,7 +3613,6 @@
                 tCtx.fillText(fmt(maxV * (i / 4), 0), padL - 6, y + 3.5);
             }
 
-            // X軸時間標記 (動態計算合理間隔：例如每5年或每12期)
             tCtx.textAlign = 'center';
             tCtx.font = 'bold 9px sans-serif';
             tCtx.fillStyle = '#475569';
@@ -3637,7 +3628,6 @@
                 const lbl = (p === 0) ? '第1期' : `第${p}期(${yr}年)`;
                 tCtx.fillText(lbl, x, padT + pH + 15);
             }
-            // 最後一期刻度
             const xEnd = padL + pW;
             tCtx.beginPath();
             tCtx.moveTo(xEnd, padT + pH);
@@ -3646,7 +3636,6 @@
             tCtx.stroke();
             tCtx.fillText(`第${totalPeriods}期`, xEnd, padT + pH + 15);
 
-            // 繪製本金、利息與月付額曲線
             function drawLine(key, color, w) {
                 tCtx.beginPath(); 
                 tCtx.strokeStyle = color; 
@@ -3659,17 +3648,15 @@
                 tCtx.stroke();
             }
 
-            drawLine('prin', '#2563eb', 2.2); // 還本金 (藍色)
-            drawLine('int', '#d97706', 2.2);  // 還利息 (琥珀/深橙)
-            drawLine('pmt', '#059669', 2.2);  // 月付總額 (綠色)
+            drawLine('prin', '#2563eb', 2.2); 
+            drawLine('int', '#d97706', 2.2);  
+            drawLine('pmt', '#059669', 2.2);  
             
-            // ================= 加入合理的「當前進度與近期排程」指示線與標籤 =================
             if (currentPeriodIndex >= 0 && currentPeriodIndex < totalPeriods) {
                 const curX = padL + (currentPeriodIndex / Math.max(1, totalPeriods - 1)) * pW;
                 const curPeriodData = scheduleData[currentPeriodIndex];
                 const curY = padT + pH - (curPeriodData.pmt / maxV) * pH;
 
-                // 垂直參考虛線
                 tCtx.save();
                 tCtx.setLineDash([3, 3]);
                 tCtx.strokeStyle = '#dc2626';
@@ -3680,7 +3667,6 @@
                 tCtx.stroke();
                 tCtx.restore();
 
-                // 標註當前節點圓點
                 tCtx.beginPath();
                 tCtx.arc(curX, curY, 4.5, 0, Math.PI * 2);
                 tCtx.fillStyle = '#dc2626';
@@ -3689,7 +3675,6 @@
                 tCtx.lineWidth = 2;
                 tCtx.stroke();
 
-                // 當前進度提示泡泡標籤
                 const tipText = `📍目前第 ${curPeriodData.period} 期`;
                 tCtx.font = 'bold 9.5px sans-serif';
                 const tipW = tCtx.measureText(tipText).width + 8;
@@ -3706,7 +3691,6 @@
                 tCtx.fillText(tipText, boxX + tipW / 2, padT - 6);
             }
 
-            // 趨勢圖頂端圖例 (高對比深色)
             tCtx.textAlign = 'left'; 
             tCtx.font = 'bold 10px sans-serif';
             const legends = [
@@ -3724,7 +3708,7 @@
         }
 
         // =========================================================================
-        // 核心亮點：跨平台 / iPhone Safari 專用高解析度 PDF 轉出列印引擎
+        // 核心亮點：PDF 轉出引擎 (首頁資訊嚴格自適應單頁，逐期明細強制第 2 頁展開)
         // =========================================================================
         function generatePDFReport() {
             const btn = document.getElementById('btnPrintPdf');
@@ -3737,27 +3721,22 @@
 
             setTimeout(() => {
                 try {
-                    // 1. 將 Canvas 轉為 Base64 高解析度 PNG 圖片 (解決 iOS 列印 Canvas 空白問題)
                     const pieCanvas = document.getElementById('pieChart');
                     const trendCanvas = document.getElementById('trendChart');
                     const pieImgData = pieCanvas.toDataURL('image/png', 1.0);
                     const trendImgData = trendCanvas.toDataURL('image/png', 1.0);
 
-                    // 2. 預估總頁數
                     const rowsPerPage = 42;
                     const tablePages = Math.max(1, Math.ceil(scheduleData.length / rowsPerPage));
                     const totalPages = 1 + tablePages;
 
-                    // 3. 獲取近三月預報資料
                     const upcomingContainer = document.getElementById('upcomingCardsContainer');
                     const upcomingHtml = upcomingContainer ? upcomingContainer.innerHTML : '';
 
-                    // 4. 獲取調息與還本清單
                     const hikeHtml = document.getElementById('pdfHikeList').innerHTML;
                     const prepayHtml = document.getElementById('pdfPrepayList').innerHTML;
                     const adviceHtml = document.getElementById('aiAdviceContent').innerHTML;
 
-                    // 5. 彙整本利攤還明細資料
                     const nowYM = `${new Date().getFullYear()}-${String(new Date().getMonth()+1).padStart(2,'0')}`;
                     const rowsHtml = scheduleData.map(r => {
                         const isCur = r.date.slice(0, 7) === nowYM;
@@ -3775,11 +3754,12 @@
                         </tr>`;
                     }).join('');
 
-                    // 6. 構建專屬列印視圖 DOM (Print View DOM)
                     const curBaseRate = parseFloat(document.getElementById('baseRate').value) || 0;
                     const printContainer = document.getElementById('printViewContainer');
+                    
+                    // 構建純淨列印視圖：第一頁採用嚴格高度邊界與自適應緊湊結構
                     printContainer.innerHTML = `
-                        <!-- ==================== 第一頁：財務分析儀表板總覽 ==================== -->
+                        <!-- ==================== 第一頁：全案財務分析儀表板總覽 (嚴格不超頁) ==================== -->
                         <div class="print-page-1">
                             <div class="print-report-header">
                                 <h1>房貸與貸款本息攤還分析報告 - ${summaryData.name}</h1>
@@ -3787,7 +3767,7 @@
                                 <p>核貸金額：${summaryData.amtWan} 萬元 ｜ 基準利率：${fmtRate(curBaseRate)}% ｜ 總利息支出：NT$ ${fmt(summaryData.totInt)} 元 (年均息約 NT$ ${fmt(summaryData.avgYearInt)})</p>
                             </div>
 
-                            <!-- 即時進度卡片 (高對比黑灰深藍) -->
+                            <!-- 即時進度卡片 (4欄精緻並排) -->
                             <div class="print-banner">
                                 <div class="print-banner-title">
                                     ${document.getElementById('currentBannerText').innerText} ｜ ${document.getElementById('currentBannerPmt').innerText}
@@ -3831,15 +3811,15 @@
                                 </div>
                             </div>
 
-                            <!-- 圖表區：替換為 PNG 圖片標籤 (含合理年份與進度指示) -->
+                            <!-- 圖表區：將 Canvas 替換為圖片 (高解析度，嚴格高度限制) -->
                             <div class="print-charts-row">
                                 <div class="print-chart-box">
                                     <h4>本金與利息比重分析 (萬元)</h4>
-                                    <img src="${pieImgData}" alt="貸款本金與總利息比重" style="max-height:160px;">
+                                    <img src="${pieImgData}" alt="貸款本金與總利息比重">
                                 </div>
                                 <div class="print-chart-box">
                                     <h4>各期償還本金、利息與月付額走勢 (元)</h4>
-                                    <img src="${trendImgData}" alt="各期攤還走勢" style="max-height:160px;">
+                                    <img src="${trendImgData}" alt="各期攤還走勢">
                                 </div>
                             </div>
 
@@ -3848,11 +3828,11 @@
                                 <h4>📋 貸款條件異動與排程紀錄</h4>
                                 <div class="print-event-cols">
                                     <div class="print-event-col">
-                                        <div style="font-weight:800;color:#b45309;margin-bottom:2px;">📈 動態升息 / 利率異動紀錄</div>
+                                        <div style="font-weight:800;color:#b45309;margin-bottom:1px;">📈 動態升息 / 利率異動紀錄</div>
                                         <ul>${hikeHtml}</ul>
                                     </div>
                                     <div class="print-event-col">
-                                        <div style="font-weight:800;color:#047857;margin-bottom:2px;">💵 提前償還本金紀錄</div>
+                                        <div style="font-weight:800;color:#047857;margin-bottom:1px;">💵 提前償還本金紀錄</div>
                                         <ul>${prepayHtml}</ul>
                                     </div>
                                 </div>
@@ -3905,6 +3885,7 @@
                     overlay.style.display = 'none';
                     btn.disabled = false;
 
+                    // 延遲 300ms 確保 iPhone Safari 渲染圖片緩衝區完成後開啟預覽
                     setTimeout(() => {
                         window.print();
                     }, 300);
@@ -3974,7 +3955,7 @@
             });
             htmlStr += `</table></body></html>`;
 
-            const blob = new Blob(['﻿' + htmlStr], { type: 'application/vnd.ms-excel;charset=utf-8' });
+            const blob = new Blob(['\ufeff' + htmlStr], { type: 'application/vnd.ms-excel;charset=utf-8' });
             const a = document.createElement('a');
             a.href = URL.createObjectURL(blob);
             a.download = `${prjName}.xls`;
@@ -4016,6 +3997,5 @@
 
         window.onload = calculate;
     </script>
-
 
 </body></html>
